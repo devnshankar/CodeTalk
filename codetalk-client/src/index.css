@@ -1,0 +1,14 @@
+button {
+    background-color: black;
+    padding: 5px 40px;
+    border-width: 0px;
+    border-radius: 20px;
+    color: white
+
+}
+
+button:hover{
+  background-color: lime;
+    color: black;
+    transition: 0.3s;
+}

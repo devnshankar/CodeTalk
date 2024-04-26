@@ -1,0 +1,30 @@
+{
+  "name": "two-factor-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "server": "nodemon -e js,env,json src/index.js",
+    "client": "npm run dev --prefix codetalk",
+    "database": "docker compose up -d",
+    "dev": "concurrently \"npm run database\" \"npm run client\" \"npm run server\"",
+    "devoff": "docker compose down",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.2",
+    "nodemailer": "^6.9.13"
+  }
+}
