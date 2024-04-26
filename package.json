@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "server": "nodemon -e js,env,json src/index.js",
-    "client": "npm run dev --prefix codetalk",
+    "client": "npm run dev --prefix codetalk-client",
     "database": "docker compose up -d",
     "dev": "concurrently \"npm run database\" \"npm run client\" \"npm run server\"",
     "devoff": "docker compose down",

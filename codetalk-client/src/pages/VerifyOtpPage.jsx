@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-
+import useUserStore from "../../zustand/store.jsx";
 function VerifyOtpPage() {
   const [otp, setOtp] = useState("");
   const [countdown, setCountdown] = useState(120); // Initial countdown value in seconds
   const navigate = useNavigate();
-
+  const { user, setUser } = useUserStore();
+  
   // Function to handle OTP form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
-
+    
     try {
       // Make axios call to verify OTP endpoint
-      const response = await axios.post('http://localhost:5085/user/loginuser', { email: "pdfnotes66@gmail.com", otp });
+      const response = await axios.post('http://localhost:5085/user/loginuser', { email: user.email, otp });
 
       // Assuming OTP verification was successful
       console.log(response.data); // Log the response data

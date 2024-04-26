@@ -1,26 +1,34 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
+import useUserStore from "../../zustand/store.jsx";
+
 
 function LoginPage() {
   const [email, setEmail] = useState("pdfnotes66@gmail.com");
   const [password, setPassword] = useState("pdfnotes66");
-  const [ loginLoading, setLoginLoading] = useState(false)
+  const [loginLoading, setLoginLoading] = useState(false);
   const navigate = useNavigate();
+
+  const { setUser } = useUserStore();
 
   const handleFormSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission
 
     try {
-      setLoginLoading(loginLoading => true)
+      setLoginLoading((loginLoading) => true);
       // Make axios call to login url
-      const response = await axios.put('http://localhost:5085/user/getotp', { email, password });
-      setLoginLoading(loginLoading => false)
+      const response = await axios.put("http://localhost:5085/user/getotp", {
+        email,
+        password,
+      });
+      setUser({email: email})
+      setLoginLoading((loginLoading) => false);
       // Assuming login was successful and a token is received in response
       console.log(response.data); // Log the response data
-      navigate('/verify'); // Redirect to the dashboard
+      navigate("/verify"); // Redirect to the dashboard
     } catch (error) {
-      console.error('Login failed:', error.response.data);
+      console.error("Login failed:", error.response.data);
       // Handle login error, e.g., display error message to the user
     }
   };
@@ -53,9 +61,7 @@ function LoginPage() {
           type="password"
           placeholder="password"
         />
-        <button type="submit">{
-          (loginLoading)? "Loading !!!" : "Login"
-        }</button>
+        <button type="submit">{loginLoading ? "Loading !!!" : "Login"}</button>
         <Link to="/signup">
           <h6>Dont have an account yet? Register here</h6>
         </Link>
